@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["characters"])
+defineProps(["characters", "filterStatus", "showStatus"])
 const emit = defineEmits(["mouseMoveGradient", "mouseLeave"])
 
 const mouseMoveGradient = (event) => {
@@ -12,9 +12,9 @@ const mouseLeave = (event) => {
 </script>
 
 <template>
-  <div class="characterBox">
+  <section class="characterBox">
     <div class="charactersList">
-      <div class="characterCard"
+      <article class="characterCard"
         v-for="character in characters" :key="character.id">
 
         <div class="mainCharacterInfo">
@@ -22,7 +22,7 @@ const mouseLeave = (event) => {
           
           <div class="info">
             <div class="topGradientLayer" @mousemove="mouseMoveGradient" @mouseleave="mouseLeave"></div>
-            <div class="nameCharacter"> {{ character.name }} </div>
+            <label class="nameCharacter"> {{ character.name }} </label>
 
             <div class="status">
               <svg
@@ -55,12 +55,13 @@ const mouseLeave = (event) => {
               </svg>
               <label>{{ character.status }}</label>
             </div>
-            <div class="species"> {{ character.species }} </div>
+            <label class="species"> {{ character.species }} </label>
           </div>
         </div>
-      </div>
+      </article>
       
     </div>
+    
     <div class="filterContainer">
       <label class="filterSection">Filters</label>
       <div class="nameBox">
@@ -69,11 +70,16 @@ const mouseLeave = (event) => {
       </div>
       <div class="statusBox">
         <label class="filterStatus">Status</label>
-        <input type="text"/>
+        <select v-bind="filterStatus">
+          <option value="">--Choose one of the options--</option>
+          <option value="Alive">Alive</option>
+          <option value="Dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
       </div>
 
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -84,14 +90,13 @@ const mouseLeave = (event) => {
   margin-left: 99px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   min-width: 640px;
   padding: 15px 15px 50px 15px;
 
   border-radius: 15px 15px 0 0;
   background: rgb(58, 58, 58);
   box-shadow: inset 0 0 4px rgb(0, 255, 119);
-  
+
   .charactersList {  
     display: flex;
     flex-direction: row;
@@ -156,7 +161,6 @@ const mouseLeave = (event) => {
     align-items: center;
     min-width: 250px;
     width: 20%;
-    border: solid red;
 
     .filterSection {
       margin: 30px 0 30px 0;

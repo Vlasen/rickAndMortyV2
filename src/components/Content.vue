@@ -27,6 +27,8 @@ const state = reactive({
   }],
   filterName: "",
   filterStatus: "",
+  // showName: false,
+  showStatus: false,
 });
 
 function buttonActive(event) {
@@ -138,25 +140,27 @@ onMounted(() => {
 
 <template>
   <main>
-    <div class="buttonBox" @click="buttonActive">
-      <div class="buttonContainer">
-        <div class="button" id="charactersButton" 
-        @click="characterFilter(state.filterName, state.filterStatus)">characters</div>
+    <section class="buttonBox" @click="buttonActive">
+      <div class="buttonWrapper">
+        <button type="button" class="button" id="charactersButton" 
+        @click="characterFilter(state.filterName, state.filterStatus)">characters</button>
         <div class="shadowBox" id="charactersShadow"></div>
       </div>
-      <div class="buttonContainer">
-        <div class="button" id="locationsButton" 
-            @click="getLocations">locations</div>
+      <div class="buttonWrapper">
+        <button type="button" class="button" id="locationsButton" 
+            @click="getLocations">locations</button>
         <div class="shadowBox" id="locationsShadow"></div>
       </div>
-      <div class="buttonContainer">
-        <div class="button" id="episodesButton">episodes</div>
+      <div class="buttonWrapper">
+        <button type="button" class="button" id="episodesButton">episodes</button>
         <div class="shadowBox" id="episodesShadow"></div>
       </div>
-    </div>
+    </section>
 
       <Characters 
         :characters="state.charactersResult"
+        :filterStatus="state.filterStatus"
+        :showStatus="state.showStatus"
         @mouseLeave="mouseLeave"
         @mouseMoveGradient="mouseMoveGradient"
         v-if="state.buttons[0].status"
@@ -203,6 +207,7 @@ main {
         clip-path: polygon(0 0, 180px 0, 200px 20px, 200px 40px, 0 40px);
         transform: rotate(-90deg);
         box-shadow: inset 0 0 4px rgb(0, 255, 119);
+        border: none;
 
         font-family: "Jersey 15", serif;
         font-size: 1.8em;

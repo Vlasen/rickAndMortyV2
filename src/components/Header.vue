@@ -2,11 +2,11 @@
 </script>
 
 <template>
-  <div class="headerBox">
+  <header class="headerBox">
     <img alt="Rick and Morty Logo" 
           class="logo" 
           src="@/assets/logo.png"/>
-  </div>
+  </header>
 </template>
 
 <style>
